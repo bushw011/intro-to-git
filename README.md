@@ -197,6 +197,7 @@ You've now got the latest version of `master`, which may include various
 changes other people have made. You need to _merge_ your changes from
 your feature branch into the `master` branch.
 * `git merge <feature branch>` on the command line
+
 >ToDo: Add information about manually merging on the command line.
 
 Now that your copy of `master` has your work on it, you want to push
@@ -276,6 +277,7 @@ which they'll later regret for some other reason. So if you have an hour
 to work on something, for example, you probably want to save 10-15
 minutes of that for committing (so you have time to write good commit
 messages), pushing, and otherwise cleaning up after yourself.
+
 >ToDo: make detailed instructions on how to resolve merge conflicts manually.
 
 
