@@ -71,8 +71,6 @@ git checkout -b <branch_name>
 so Pat might use `git checkout -b chris_info` to create the branch for
 setting up Chris's info.
 
-In WebStorm, you can accomplish this through the
-`VCS -> Git -> Branches…` dialogue, choosing the `New Branch` option.
 
 ## Creating a page
 
@@ -114,11 +112,6 @@ bigger and the team coordination gets more complex, so changes you
 make are likely to still be useful even if they're several weeks after
 we "complete" this lab.
 
-:bangbang: If you create the new file with WebStorm it's likely to
-ask you if you want to add it to the set of files that were being
-tracked by `git`. If that happens, say "Yes" to simplify things later,
-although it's not a big deal if you say "No".
-
 ## Sharing that new page
 
 After a page is created, you need to share that with the class by
@@ -129,10 +122,6 @@ this is easy:
 
 * Stage the new file so `git` knows you want to commit it
    * `git add <filename>` on the command line
-   * `VCS -> Git -> Add` in WebStorm (although if you used WebStorm to
-   create the file, it probably asked you if you wanted to add it to
-   the set of files that were being tracked by `git`, so you may not
-   need to explicitly add it)
 * Commit the change _to your local copy of the repository_
    * `git commit` on the command line.
       * This will bring up a (command line) editor for you to enter
@@ -147,14 +136,6 @@ this is easy:
        shows you how to set various GUI editors like `atom`, but you
        could also use something like `git config --global core.editor nano`
        to set it to a command line editor like `nano`.
-   * `VCS -> Commit Changes…` in WebStorm. This gives you a nice
-    dialogue where you can select which files you actually
-    want to include in this commit. This is useful because you may have
-    made a few changes that are related to different issues – this dialogue
-    makes it easier to comment separately on unrelated changes, increasing
-    the value of your commits and commit messages. You can also use the
-    `Diff` tool in that dialogue to remind yourself of what all you've changed,
-    which makes it easier to write
     [informative, complete commit messages](http://chris.beams.io/posts/git-commit/).
 
 ## Pushing your branch to Github
@@ -168,7 +149,6 @@ likely in this case since you're working on a special branch you created
 for this contact info document) all you'll need to do is _push_ your
 work up to the Github repository:
 * `git push` on the command line
-* `VCS -> Git -> Push…` in WebStorm
 This will push all commits on your current branch to a branch with the
 same name up on Github; if you refresh your view of the Github repository
 you should see your branch listed, probably along with a lot of other
@@ -193,11 +173,8 @@ repository, and you have to make sure you play nice with them.
 The basic process you'll typically want to follow is:
 * Make sure all your changes on your feature branch are committed locally.
    * `git status` on the command line
-   * The "Local Changes" tab in the "Version Control" window in WebStorm
 * Checkout the `master` branch
    * `git checkout master` on the command line
-   * `VCS -> Git -> Branches…` in WebStorm, and then choose `master ->
-   origin/master` followed by `Checkout`
 
 At this point you should be on the `master` branch, and all your work
 on your new contact info page should "disappear". Don't worry, it's still
@@ -210,7 +187,6 @@ other people have been committing and pushing changes. So you should
 first make sure to `pull` any changes other people have made into your
 copy:
 * `git pull` on the command line
-* `VCS -> Git -> Pull…` in WebStorm
 If you're lucky, any changes you've made won't interact badly (_conflict_)
 with changes other people have made. That should be the case here because
 so far everyone's working on completely different files and you haven't
@@ -221,15 +197,11 @@ You've now got the latest version of `master`, which may include various
 changes other people have made. You need to _merge_ your changes from
 your feature branch into the `master` branch.
 * `git merge <feature branch>` on the command line
-* `VCS -> Git -> Merge Changes…` brings up a dialogue where you can then
-choose the branch(es) you want to merge into your currently checked out
-branch (`master` in this case). Check the box by your feature branch and
-hit `Merge` and you should get your changes merged in.
+>ToDo: Add information about manually merging on the command line.
 
 Now that your copy of `master` has your work on it, you want to push
 that up to Github:
 * `git push` on the command line
-* `VCS -> Git -> Push…` in WebStorm
 
 Normally this should just work because you did a pull on `master` just
 a few minutes ago. Occassionally, however, someone will manage to sneak
@@ -237,9 +209,7 @@ in a pushed change between your `pull` and `push`, and that's actually
 pretty likely today with so many people working in parallel on the same
 repository. If that happens you'll get some sort of error saying that
 your attempt to push `master` was rejected, and suggesting that you pull
-or merge remote changes before you push. WebStorm lets you do this from
-the error dialogue – if you click the `Merge` button WebStorm will pull
-down the changes from Github and merge them into your `master`.
+or merge remote changes before you push.
 
 At that point you would try to `push` again, repeating the pull/merge
 step yet again if someone has once again snuck in on you. Eventually,
@@ -306,26 +276,9 @@ which they'll later regret for some other reason. So if you have an hour
 to work on something, for example, you probably want to save 10-15
 minutes of that for committing (so you have time to write good commit
 messages), pushing, and otherwise cleaning up after yourself.
+>ToDo: make detailed instructions on how to resolve merge conflicts manually.
 
-Dealing with these kinds of merge conflicts can be a frustrating
-experience, but WebStorm has a nice GUI merge conflict tool that makes
-it a little easier. The sequence of events (in WebStorm) is likely to
-look something like:
 
-* An attempt to `push` will be rejected.
-* The dialogue that tells you this will include "Cancel", "Merge", and
-"Rebase". For the moment, choose "Merge".
-* That brings up a new dialogue listing each file that had a conflict.
-There's likely just the one in this case, your team's file.
-Select it and click "Merge".
-* That brings up a dialogue with the original version of the document
-in the middle pane, and your version and the version with the conflicting
-changes in the left and right panes. You can use the `>>`/`<<` symbols
-to copy changes from the left or right pane into the result, or click
-the little magic wand (?) icon to let WebStorm take it's best guess at
-the right merge. (If at any point you end up something icky, you can
-click the "Abort" button and try again. You can also directly edit
-the middle pane to tweak the results.)
 
 When that's all done then the merge conflict will be _resolved_ in `git`
 terminology, and you can try the `push` again. You should carefully
@@ -341,4 +294,3 @@ Once everyone has added their group's info to the team files then we're
 done with the lab! If there's time, then we might merge the three
 team files into a single big "master" file in class; otherwise we'll do
 that after lab is done.
-
